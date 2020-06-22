@@ -1,0 +1,108 @@
+
+
+clc;
+clear all;
+
+%% plot BRDF
+figure
+set(gcf,'unit','normalized','position',[0.2,0.2,0.3,0.6]);
+set(gca, 'Position', [0 0 1 1])
+nameStrings = {'Chickpea', 'Grass', 'Rice'};
+for i = 1:3
+    load(['results/' nameStrings{i} '.mat']);
+    
+    switch i
+        case 1
+            index = 7; %8 7 and 8
+        case 2
+            index = 11; % 9 and 11
+        case 3
+            index = 7;% 4, 7, 9, 13
+    end
+    filters = Cycle_Num == index & rSIF760>0.2 & rSIF687>0.2;
+    RAA_m = RAA(filters);
+    VAA_m = SAA(filters)+RAA(filters);
+    VAA_m(VAA_m>360)=VAA_m(VAA_m>360)-360;
+    VZA_m = VZA(filters);
+    rSIF760_m = rSIF760(filters) - nSIF760_true(filters);
+    nSIF760_NIR_m = nSIF760_NIR(filters) - nSIF760_true(filters);
+    nSIF760_NIRv_m = nSIF760_NIRv(filters) - nSIF760_true(filters);
+    nSIF760_Kernel_m = nSIF760_Kernel(filters) - nSIF760_true(filters);
+    
+    cmin = -max([abs(min(rSIF760_m)) abs(max(rSIF760_m))]);
+    cmax = abs(cmin);
+    
+    
+    if i==1
+        istitle  = 1;
+    else
+        istitle = 0;
+    end
+    subplot('position',[0.1 0.33*(3-i) 0.28 0.3])
+    plot_polarfigure(VAA_m,VZA_m, rSIF760_m, cmin, cmax, 'Uncorrected', istitle)
+    % ylabel('Chickpea')
+       if(i == 1)
+        ylabel('Chickpea', 'FontWeight', 'Bold')
+    elseif(i == 2)
+        ylabel('Grass', 'FontWeight', 'Bold')
+    else
+        ylabel('Rice', 'FontWeight', 'Bold')
+    end
+    subplot('position',[0.33 0.33*(3-i) 0.28 0.33])
+    plot_polarfigure(VAA_m,VZA_m, nSIF760_NIRv_m, cmin, cmax,'NIRv', istitle)
+    
+    subplot('position',[0.66 0.33*(3-i) 0.28 0.33])
+    
+    plot_polarfigure(VAA_m,VZA_m, nSIF760_Kernel_m, cmin, cmax, 'Kernel-driven', istitle)
+    cb=colorbar('location','southoutside');
+    cb.Position = [0.02 0.11 0.46 0.04];
+    
+ 
+    
+    
+end
+%% red
+figure
+nameStrings = {'Chickpea', 'Grass', 'Rice'};
+for i = 1:3
+    load(['results/' nameStrings{i} '.mat']);
+    
+    switch i
+        case 1
+            index = 7; %8 7 and 8
+        case 2
+            index = 11; % 9 and 11
+        case 3
+            index = 7;%  7, 9, 13
+    end
+    filters = Cycle_Num == index & rSIF760>0.2 & rSIF687>0.2;
+    RAA_m = RAA(filters);
+    VAA_m = SAA(filters)+RAA(filters);
+    VAA_m(VAA_m>360)=VAA_m(VAA_m>360)-360;
+    VZA_m = VZA(filters);
+    rSIF687_m = rSIF687(filters) - nSIF687_true(filters);
+    nSIF687_Red_m = nSIF687_Red(filters) - nSIF687_true(filters);
+    nSIF687_Redv_m = nSIF687_Redv(filters) - nSIF687_true(filters);
+    nSIF687_Kernel_m = nSIF687_Kernel(filters) - nSIF687_true(filters);
+    
+    cmin = -max([abs(min(rSIF687_m)) abs(max(rSIF687_m))]);
+    cmax = abs(cmin);
+    
+    subplot(3,3,1+(i-1)*3)
+    plot_polarfigure(VAA_m,VZA_m, rSIF687_m, cmin, cmax, 'Original')
+    
+    if(i == 1)
+        ylabel('Chickpea')
+    elseif(i == 2)
+        ylabel('Grass')
+    else
+        ylabel('Rice')
+    end
+    subplot(3,3,2+(i-1)*3)
+    plot_polarfigure(VAA_m,VZA_m, nSIF687_Redv_m, cmin, cmax,'SIF687 normalized by Redv')
+    
+    subplot(3,3,3+(i-1)*3)
+    plot_polarfigure(VAA_m,VZA_m, nSIF687_Kernel_m, cmin, cmax, 'SIF687 normalized by Kernel-driven')
+    
+    
+end
