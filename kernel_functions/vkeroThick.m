@@ -15,6 +15,8 @@ relaz = rAzimuth;
 cosvz = cos(vz);
 cossz = cos(sz);
 cosxi = cossz.*cosvz + sin(sz).*sin(vz).*cos(relaz);
+cosxi(cosxi>=1) = 1;
+cosxi(cosxi<=-1) = -1;
 xi = acos(cosxi);
 K_vol =((pi/2 -xi).*cosxi + sin(xi))./(cossz + cosvz) - pi/4;
 
