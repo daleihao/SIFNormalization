@@ -5,7 +5,7 @@
  ## 2. Evaluate the SIF-GPP relationship
  
  ## 3. Hotspot SIF
- 
+ Reference: Hao, D., Asrar, G.R., Zeng, Y., Yang, X., Li, X., Xiao, J., Guan, K., Wen, J., Xiao, Q., Berry, J.A. and Chen, M. (2021), Potential of hotspot solar‐induced chlorophyll fluorescence for better tracking terrestrial photosynthesis. Global Change Biology. https://doi.org/10.1111/gcb.15554
  ## 4. Matlab code for widely-used kernel-driven models
  Reference: Hao, D., J. Wen, Q. Xiao, D. You, and Y. Tang (2019), An Improved Topography-Coupled Kernel-Driven Model for Land Surface Anisotropic Reflectance, IEEE Transactions on Geoscience Remote Sensing, 58(4), 2833-2847.
 # Contact: dalei.hao.93@gmail.com; dalei.hao@pnnl.gov
