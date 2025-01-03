@@ -1,5 +1,5 @@
-# SIFNormalization
- ## 1. Normalizating directional SIF to nadir (or any other given viewing direction)
+# SIF Normalization
+ ## 1. Normalize directional SIF to nadir (or any other given viewing direction)
  Reference: Hao, D., Y. Zeng, H. Qiu, K. Biriukova, M. Celesti, M. Migliavacca, M. Rossini, G. R. Asrar, and M. Chen (2020), Practical Approaches for Normalizing Directional Solar-induced Fluorescence to a Standard Viewing Geometry, Remote Sensing of Environment, 112171,ISSN 0034-4257, https://doi.org/10.1016/j.rse.2020.112171.
 
  ## 2. Evaluate the SIF-GPP relationship
